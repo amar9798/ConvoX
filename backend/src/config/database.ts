@@ -1,14 +1,18 @@
 import mongoose from "mongoose";
 
 export const connectDB = async () => {
-    try {
-        await mongoose.connect(process.env.MONGODB_URI as string);
-        console.log("✅MongoDB connected successfully");
+    const uri = process.env.MONGODB_URI;
 
+    if (!uri) {
+        console.error("❌ MONGODB_URI is not set");
+        process.exit(1); // fail fast
+    }
+
+    try {
+        await mongoose.connect(uri);
+        console.log("✅ MongoDB connected successfully");
     } catch (error) {
-        console.error("❌MongoDB connection failed:", error);
-        process.exit(1);  // exit with failure
-        // status code 1 means failure
-        // status code 0 means success
+        console.error("❌ MongoDB connection failed:", error);
+        process.exit(1); // status code 1 = failure
     }
 };

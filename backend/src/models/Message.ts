@@ -29,7 +29,7 @@ const MessageSchema = new Schema<IMessage>({
 
 // indexes for faster queries
 
-MessageSchema.index({ chat: 1, createdAt: -1 });    // oldest one first
+MessageSchema.index({ chat: 1, createdAt: -1 });    // Newest one first
 
 // 1 - asc
 // -1 -> desc
